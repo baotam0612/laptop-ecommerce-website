@@ -296,3 +296,10 @@ footer .container .inner-wrap .inner-des strong {
     text-align: centrer;
     
 }
+
+.form-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 25%;
+}

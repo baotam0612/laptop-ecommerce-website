@@ -20,7 +20,7 @@ public class RoleEntity extends BaseEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@Column(name="name")
 	private String name;
@@ -34,11 +34,11 @@ public class RoleEntity extends BaseEntity{
 	            inverseJoinColumns = @JoinColumn(name="user_id", nullable = false))
 	private List<UserEntity> users = new ArrayList<UserEntity>();
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

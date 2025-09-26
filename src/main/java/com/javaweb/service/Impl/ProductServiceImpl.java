@@ -3,6 +3,9 @@ package com.javaweb.service.Impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +13,10 @@ import com.javaweb.builder.ProductSearchBuilder;
 import com.javaweb.converter.ProductConverter;
 import com.javaweb.converter.ProductSearchBuilderConverter;
 import com.javaweb.entity.ProductEntity;
+import com.javaweb.model.dto.ProductDTO;
 import com.javaweb.model.request.ProductSearchRequest;
 import com.javaweb.model.response.ProductSearchResponse;
+import com.javaweb.repository.ProductRepository;
 import com.javaweb.repository.custom.Impl.ProductRepositoryImpl;
 import com.javaweb.service.ProductService;
 
@@ -27,6 +32,12 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired
 	public ProductRepositoryImpl productRepositoryImpl;
 	
+	@Autowired
+	public ModelMapper modelMapper;
+	
+	@Autowired
+	public ProductRepository productRepository;
+	
 	@Override
 	public List<ProductSearchResponse> findAll(ProductSearchRequest productRequest) {
 		ProductSearchBuilder productSearchBuilder = productSearchBuilderConverter.toProductSearchConverter(productRequest);
@@ -36,6 +47,16 @@ public class ProductServiceImpl implements ProductService{
 			results.add(productConverter.toProductSearchResponse(item));
 		}
 		return results;
+	}
+
+	@Override
+	@Transactional
+	public ProductDTO addOrUpdateProduct(ProductDTO productDTO) {
+		// TODO Auto-generated method stub
+		ProductEntity productEntity = modelMapper.map(productDTO, ProductEntity.class);
+		productRepository.save(productEntity);
+		productDTO.setId(productDTO.getId());	
+		return productDTO;
 	}
 
 	

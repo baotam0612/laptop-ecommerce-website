@@ -12,7 +12,7 @@
 
 <div class="flex-fill p-3">
             <div class="main-container">
-            <form:form modelAttribute="modelSearch" id="listForm" action="${productListURL}" method="GET">
+            <form:form modelAttribute="modelSearch" id="listForm" method="GET">
                 <div class="form-group">
                     <label>Tên sản phẩm</label>
                     <form:input class="form-control" path="name"/>
@@ -41,10 +41,20 @@
                     <label>bộ nhớ tạm(ram)</label>
                     <form:input class="form-control" path="ram"/>
                 </div>
-                <div class="search" id="btnSearchProduct">
-                      <button>Tìm kiếm</button>
-                </div>
-                </form:form>
+                <div class="form-button">
+                    <div class="search" id="btnSearchProduct">
+                        <button>Tìm kiếm</button>
+                    </div>  
+                    </div>  
+                    </form:form>           
+                        <div class="edit" id="btnEditProduct">
+                         <a href="/spring-boot/admin/product-edit">
+                            <button>Chỉnh Sửa</button>
+                            </a>
+                        </div>                  
+                
+                
+                
             </div>
 
         </div>

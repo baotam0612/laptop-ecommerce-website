@@ -3,6 +3,12 @@ package com.javaweb.model.dto;
 public class ProductDTO extends AbstractDTO<ProductDTO>{
 	
 	private String name;
+	private String category;
+	private String brand;
+	private String cpu;
+	private String gpu;
+	private String ram;
+	private String rom;
 	private String price;
 	public String getName() {
 		return name;
@@ -16,6 +22,44 @@ public class ProductDTO extends AbstractDTO<ProductDTO>{
 	public void setPrice(String price) {
 		this.price = price;
 	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public String getCpu() {
+		return cpu;
+	}
+	public void setCpu(String cpu) {
+		this.cpu = cpu;
+	}
+	public String getGpu() {
+		return gpu;
+	}
+	public void setGpu(String gpu) {
+		this.gpu = gpu;
+	}
+	public String getRam() {
+		return ram;
+	}
+	public void setRam(String ram) {
+		this.ram = ram;
+	}
+	public String getRom() {
+		return rom;
+	}
+	public void setRom(String rom) {
+		this.rom = rom;
+	}
+	
+	
 	
 	
 

@@ -1,7 +1,7 @@
 package com.javaweb.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
@@ -23,7 +23,7 @@ public class BaseEntity implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@Column(name="createddate")
 	@CreatedDate
@@ -41,11 +41,11 @@ public class BaseEntity implements Serializable{
 	@LastModifiedBy
 	private String modifiedBy;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

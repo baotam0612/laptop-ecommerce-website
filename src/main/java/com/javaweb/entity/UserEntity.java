@@ -21,7 +21,7 @@ public class UserEntity extends BaseEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@Column(name="username", nullable=false, unique=true)
 	private String userName;
@@ -35,11 +35,11 @@ public class UserEntity extends BaseEntity{
 	@ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<RoleEntity> roles = new ArrayList<RoleEntity>();
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

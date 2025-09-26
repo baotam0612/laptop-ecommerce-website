@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.javaweb.model.dto.ProductDTO;
 import com.javaweb.model.request.ProductSearchRequest;
 import com.javaweb.model.response.ProductSearchResponse;
 import com.javaweb.service.ProductService;
@@ -29,6 +30,12 @@ public class ProductController {
 		ProductSearchResponse productSearchResponse = new ProductSearchResponse();
 		productSearchResponse.setListResult(lists);
 		mav.addObject("productList", productSearchResponse);
+		return mav;
+	}
+	
+	@GetMapping(value="/admin/product-edit")
+	public ModelAndView ProductEdit(@ModelAttribute("modelEdit") ProductDTO productDTO,HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("/admin/product-edit");
 		return mav;
 	}
 

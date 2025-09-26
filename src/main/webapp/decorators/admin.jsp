@@ -9,7 +9,7 @@
  <link rel="stylesheet" href="/spring-boot/web/assets/css/reset.css">
       <link rel="stylesheet" href="/spring-boot/web/assets/css/base.css">
       <link rel="stylesheet" href="/spring-boot/web/assets/css/style.css">
- <style>
+<style>
 
         body {
             min-height: 100vh;
@@ -56,6 +56,26 @@
             padding: 8px 12px;
         }
          .search button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: var(--color-one);
+            border-radius: 8px;
+        }
+         .edit a button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: var(--color-one);
+            border-radius: 8px;
+        }
+        
+        .form-button .addProduct button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: var(--color-one);
+            border-radius: 8px;
+        }
+
+        .form-button .deleteProduct button {
             margin-top: 20px;
             padding: 10px 20px;
             background-color: var(--color-one);

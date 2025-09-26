@@ -39,6 +39,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
 				item.setAccessible(true);
 				String fieldName = item.getName();
 				Object value = item.get(productSearchBuilder);
+				if (value != null) {
 				if (item.getType().getName().equals("java.lang.String") && !value.equals(""))
 				    where.append(" AND p."+fieldName+" LIKE '%"+value+"%' ");
 //				if (!fieldName.equals("staffId") && !fieldName.equals("typeCode") && !fieldName.startsWith("rentArea")
@@ -53,6 +54,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
 //						}
 //					}
 //				}
+				}
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
