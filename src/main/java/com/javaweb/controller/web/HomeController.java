@@ -1,6 +1,7 @@
 package com.javaweb.controller.web;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,6 +27,9 @@ public class HomeController {
 	
 	@Autowired
 	private ProductRepositoryImpl productRepository;
+    @Autowired
+    private ProductRepository productRepositoryInterface;
+
 	
 	
 	@GetMapping(value="/trang-chu")
@@ -49,5 +54,15 @@ public class HomeController {
 		}
 		return new ModelAndView("redirect:/trang-chu");
 	}
+
+    @GetMapping(value="/product/item-{id}")
+    public ModelAndView itemPage(@PathVariable("id") Long Id, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("/web/item");
+        Optional<ProductEntity> optionalProduct = productRepositoryInterface.findById(Id);
+
+        ProductEntity pe = optionalProduct.get();
+        mav.addObject("item", pe);
+        return mav;
+    }
 	
 }

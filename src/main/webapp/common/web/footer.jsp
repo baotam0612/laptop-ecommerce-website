@@ -11,7 +11,7 @@
         <div class="container">
             <div class="inner-wrap">
                 <div class="inner-logo">
-                    <img src="/spring-boot/web/assets/images/ChatGPT Image 22_03_58 21 thg 8, 2025.png" alt="">
+                    <img src="/web/assets/images/ChatGPT Image 22_03_58 21 thg 8, 2025.png" alt="">
                 </div>
                 <div class="inner-des">
                     <div class="inner-text">

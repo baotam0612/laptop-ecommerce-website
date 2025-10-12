@@ -23,11 +23,13 @@
         <div class="container">
             <div class="inner-wrap">
                 <div class="inner-box">
+
+               <!-- lay items tu HomeController -->
                 <c:forEach var="p" items="${products}">
-                    <a href="#" class="inner-item">
+                    <a href="/product/item-${p.id}" class="inner-item">
                         <div class="inner-img"><img src="${p.imagespath}" alt=""></div>
                         <div class="inner-des">${p.name}</div>
-                        <span>${p.price}</span>
+                        <span>${p.price}VND</span>
                     </a>
                     </c:forEach>
                     

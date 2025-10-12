@@ -14,8 +14,8 @@
         <!-- Sidebar Menu -->
         <div class="sidebar d-flex flex-column p-3">
             <h4 class="text-center mb-4">Dashboard</h4>
-            <a href="/spring-boot/admin/product-list" class="active">Quản lý sản phẩm</a>
-            <a href="/spring-boot/admin/product-oder">Quản lý đơn hàng</a>
+            <a href="/admin/product-list" class="active">Quản lý sản phẩm</a>
+            <a href="/admin/product-oder">Quản lý đơn hàng</a>
         </div>
 
         <!-- Content -->

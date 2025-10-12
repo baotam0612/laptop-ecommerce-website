@@ -64,7 +64,7 @@
             	  
             	  $.ajax({
             		  type:"POST",
-            		  url: "/spring-boot/api/product",
+            		  url: "/api/product",
             		  data: JSON.stringify(data),
             		  contentType: "application/json",
       					dataType: "JSON",

@@ -1,0 +1,70 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="/common/taglib.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng của bạn</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+<h2 style="text-align:center; height: 100px;" >🛒 Giỏ hàng của bạn</h2>
+
+<c:if test="${empty cartItems}">
+    <p style="text-align:center; height: 200px;" >Giỏ hàng trống!</p>
+</c:if>
+
+<c:if test="${not empty cartItems}">
+    <table >
+        <thead>
+        <tr>
+            <th>Ảnh</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Tổng</th>
+            <th>Xóa</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="item" items="${cartItems}">
+            <tr>
+                <td><img src="${item.image}" alt=""></td>
+                <td>${item.name}</td>
+                <td>${item.price} VND</td>
+                <td>${item.quantity}</td>
+                <td>${item.total} VND</td>
+                <td><button class="remove-btn" data-id="${item.id}">Xóa</button></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+
+    <div class="total">
+        Tổng cộng: <span id="cart-total">${total}</span> VND
+    </div>
+</c:if>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(".remove-btn").click(function() {
+    var productId = $(this).data("id");
+
+    $.ajax({
+        type: "POST",
+        url: "/cart/remove",
+        data: JSON.stringify({ productId: productId }),
+        contentType: "application/json",
+        dataType: "JSON",
+        success: function(res) {
+            if (res.status === "success") {
+                alert("✅ Đã xóa sản phẩm khỏi giỏ!");
+                location.reload();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>

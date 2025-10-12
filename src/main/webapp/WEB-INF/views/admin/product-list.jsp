@@ -48,7 +48,7 @@
                     </div>  
                     </form:form>           
                         <div class="edit" id="btnEditProduct">
-                         <a href="/spring-boot/admin/product-edit">
+                         <a href="/admin/product-edit">
                             <button>Chỉnh Sửa</button>
                             </a>
                         </div>                  

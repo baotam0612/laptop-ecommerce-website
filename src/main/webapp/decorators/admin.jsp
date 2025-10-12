@@ -6,9 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <link rel="stylesheet" href="/spring-boot/web/assets/css/reset.css">
-      <link rel="stylesheet" href="/spring-boot/web/assets/css/base.css">
-      <link rel="stylesheet" href="/spring-boot/web/assets/css/style.css">
+    <link rel="stylesheet" href="/web/assets/css/reset.css">
+    <link rel="stylesheet" href="/web/assets/css/base.css">
+    <link rel="stylesheet" href="/web/assets/css/style.css">
 <style>
 
         body {
