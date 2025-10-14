@@ -70,7 +70,7 @@
 }
  table { width: 80%; margin: 20px auto; border-collapse: collapse; margin-bottom:100px;}
         table th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        table img { width: 80px; }
+        table img { width:120px; }
         table .total { text-align: right; margin-right: 10%; font-size: 18px; font-weight: bold; }
        table button { background: crimson; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 6px; }
 
@@ -79,6 +79,8 @@
  .inner-wrap { display: flex; gap: 40px; align-items: flex-start; }
   .inner-logo img { width: 300px; border-radius: 10px; }
    .inner-content { max-width: 600px; } .inner-title { font-size: 1.8rem; font-weight: bold; margin-bottom: 10px; } .inner-price { font-size: 1.5rem; color: #e63946; margin-bottom: 15px; } button.order { padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; transition: 0.2s; } button.order:hover { background-color: #0056b3; } .cart-count { font-weight: bold; color: red; }
+
+
 </style>
 
 

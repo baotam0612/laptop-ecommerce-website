@@ -11,4 +11,5 @@ public interface ProductService {
 	List<ProductSearchResponse> findAll(ProductSearchRequest productRequest);
 	
 	ProductDTO addOrUpdateProduct(ProductDTO productDTO);
+    ProductDTO findNameById(Long Id);
 }

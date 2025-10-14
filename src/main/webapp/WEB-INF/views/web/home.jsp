@@ -71,6 +71,7 @@
                     </div>
 
                 </div>
+                <br>
                 <div class="inner-box2">
                     <div class="inner-img">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/HP_logo_1979.svg/2560px-HP_logo_1979.svg.png" alt="">

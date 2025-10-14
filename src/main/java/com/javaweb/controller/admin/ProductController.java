@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.javaweb.model.dto.ProductDTO;
@@ -38,5 +39,14 @@ public class ProductController {
 		ModelAndView mav = new ModelAndView("/admin/product-edit");
 		return mav;
 	}
+
+    @GetMapping(value="/admin/product-edit-{id}")
+    public ModelAndView ProductEdit(@PathVariable("id") Long Id, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("/admin/product-edit");
+        // xuong tim Id
+        ProductDTO productDTO = productService.findNameById(Id);
+        mav.addObject("modelEdit", productDTO);
+        return mav;
+    }
 
 }

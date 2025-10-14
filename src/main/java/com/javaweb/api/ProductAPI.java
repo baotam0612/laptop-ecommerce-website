@@ -16,7 +16,6 @@ import com.javaweb.service.ProductService;
 @RequestMapping(value="/api/product")
 @Transactional
 public class ProductAPI {
-	
 	@Autowired
 	public ProductService productService;
 	
@@ -24,5 +23,4 @@ public class ProductAPI {
 	public ResponseEntity<ProductDTO> AddOrUpdateProduct(@RequestBody ProductDTO productDTO) {
 		return ResponseEntity.ok(productService.addOrUpdateProduct(productDTO));
 	}
-
 }

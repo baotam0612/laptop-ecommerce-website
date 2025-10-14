@@ -39,19 +39,36 @@
                     <label>bộ nhớ tạm(ram)</label>
                     <form:input class="form-control" path="ram"/>
                 </div>
+                <c:if test="${not empty modelEdit.id}">
+                 <div class="form-button">
+                    <div class="addProduct" id="btnAddOrUpdateProduct">
+                        <button>Sửa sản phẩm</button>
+                    </div>
+                    <div class="deleteProduct" id="btnDeleteProduct">
+                        <button>Xóa sản phẩm</button>
+                    </div>
+
+
+                </div>
+</c:if>
+                 <c:if test="${ empty modelEdit.id}">
                  <div class="form-button">
                     <div class="addProduct" id="btnAddOrUpdateProduct">
                         <button>Thêm sản phẩm</button>
+                    </div>
+
                     </div>
                     <div class="deleteProduct" id="btnDeleteProduct">
                         <button>Xóa sản phẩm</button>
                     </div>
                 </div>
+</c:if>
+                 <form:hidden path="id"/>
+
                 </form:form>
             </div>
 
-        </div>
-        </div>
+
         
         <script >
               $('#btnAddOrUpdateProduct').click(function(){

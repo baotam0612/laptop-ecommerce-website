@@ -2,6 +2,7 @@ package com.javaweb.service.Impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -25,8 +26,10 @@ import com.javaweb.service.ProductService;
 public class ProductServiceImpl implements ProductService{
 	@Autowired
 	public ProductSearchBuilderConverter productSearchBuilderConverter;
-	
-	@Autowired
+
+
+
+    @Autowired
 	public ProductConverter productConverter;
 	
 	@Autowired
@@ -54,10 +57,21 @@ public class ProductServiceImpl implements ProductService{
 	public ProductDTO addOrUpdateProduct(ProductDTO productDTO) {
 		// TODO Auto-generated method stub
 		ProductEntity productEntity = modelMapper.map(productDTO, ProductEntity.class);
+        // update or add
 		productRepository.save(productEntity);
 		productDTO.setId(productDTO.getId());	
 		return productDTO;
 	}
+
+
+    @Override
+    public ProductDTO findNameById(Long  Id) {
+        Optional<ProductEntity> result = productRepository.findById(Id);
+        ProductEntity entity = result.get();
+        ProductDTO productDTO = modelMapper.map(entity, ProductDTO.class);
+        return productDTO;
+    }
+
 
 	
 	

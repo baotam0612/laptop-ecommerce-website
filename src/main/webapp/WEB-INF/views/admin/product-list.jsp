@@ -88,8 +88,8 @@
                         <td>${item.rom}</td>
                         <td>${item.ram}</td>
                         <td>
-                            <button class="btn btn-sm btn-warning">Sửa</button>
-                            <button class="btn btn-sm btn-danger">Xóa</button>
+                            <a href="/admin/product-edit-${item.id}"><button class="btn btn-sm btn-warning">Sửa</button></a>
+                            <a><button class="btn btn-sm btn-danger">Xóa</button></a>
                         </td>
                     </tr>
                     </c:forEach>
