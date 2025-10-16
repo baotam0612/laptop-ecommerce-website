@@ -89,7 +89,7 @@
                         <td>${item.ram}</td>
                         <td>
                             <a href="/admin/product-edit-${item.id}"><button class="btn btn-sm btn-warning">Sửa</button></a>
-                            <a><button class="btn btn-sm btn-danger">Xóa</button></a>
+                            <button class="btn btn-sm btn-danger btnDelete" data-id="${item.id}">Xóa</button>
                         </td>
                     </tr>
                     </c:forEach>
@@ -97,9 +97,11 @@
             </table>
         </div>
     </div>
-    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script >
-    
+
     $('#btnSearchProduct').click(function() {
     	var data = {};
     	var formData = $('listForm').serializeArray();
@@ -107,10 +109,10 @@
     		data[""+v.name+""] = v.value;
     	});
     	console.log("ok");
-    	
+
     	$.ajax({
 			type: "POST",
-			url: "http://localhost:8081/admin/product",
+			url: "/admin/product",
 			data: JSON.stringify(data),
 			contentType: "application/json",
 			dataType: "JSON",
@@ -122,19 +124,42 @@
 			}
 		});
     });
-    
-    
-    $('#btnSearchProduct').click(funtion(e) {
+
+
+    $('#btnSearchProduct').click(function(e) {
     	e.preventDefault();
     	$('#listForm').submit();
-    })
-                 		
-    
-    
-    
+
+    });
+
+    $(document).on('click','.btnDelete',function(){
+         var proId = $(this).data("id");
+
+
+         $.ajax({
+         type: "POST",
+			url: "/api/product/remove",
+			data: JSON.stringify({ productId: proId }),
+			contentType: "application/json",
+			dataType: "JSON",
+			success: function (respond) {
+				alert("Đã xóa sản phẩm!");
+                location.reload();
+			},
+			error: function (respond) {
+				console.log("failed");
+			}
+        });
+
+    });
+
+
+
+
+
+
     </script>
-        
-        
+
 
 </body>
 </html>

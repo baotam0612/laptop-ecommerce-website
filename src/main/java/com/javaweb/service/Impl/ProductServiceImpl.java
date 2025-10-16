@@ -24,44 +24,44 @@ import com.javaweb.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService{
-	@Autowired
-	public ProductSearchBuilderConverter productSearchBuilderConverter;
+    @Autowired
+    public ProductSearchBuilderConverter productSearchBuilderConverter;
 
 
 
     @Autowired
-	public ProductConverter productConverter;
-	
-	@Autowired
-	public ProductRepositoryImpl productRepositoryImpl;
-	
-	@Autowired
-	public ModelMapper modelMapper;
-	
-	@Autowired
-	public ProductRepository productRepository;
-	
-	@Override
-	public List<ProductSearchResponse> findAll(ProductSearchRequest productRequest) {
-		ProductSearchBuilder productSearchBuilder = productSearchBuilderConverter.toProductSearchConverter(productRequest);
-		List<ProductEntity> lists = productRepositoryImpl.findAll(productSearchBuilder);
-		List<ProductSearchResponse> results = new ArrayList<ProductSearchResponse>();
-		for(ProductEntity item : lists) {
-			results.add(productConverter.toProductSearchResponse(item));
-		}
-		return results;
-	}
+    public ProductConverter productConverter;
 
-	@Override
-	@Transactional
-	public ProductDTO addOrUpdateProduct(ProductDTO productDTO) {
-		// TODO Auto-generated method stub
-		ProductEntity productEntity = modelMapper.map(productDTO, ProductEntity.class);
+    @Autowired
+    public ProductRepositoryImpl productRepositoryImpl;
+
+    @Autowired
+    public ModelMapper modelMapper;
+
+    @Autowired
+    public ProductRepository productRepository;
+
+    @Override
+    public List<ProductSearchResponse> findAll(ProductSearchRequest productRequest) {
+        ProductSearchBuilder productSearchBuilder = productSearchBuilderConverter.toProductSearchConverter(productRequest);
+        List<ProductEntity> lists = productRepositoryImpl.findAll(productSearchBuilder);
+        List<ProductSearchResponse> results = new ArrayList<ProductSearchResponse>();
+        for(ProductEntity item : lists) {
+            results.add(productConverter.toProductSearchResponse(item));
+        }
+        return results;
+    }
+
+    @Override
+    @Transactional
+    public ProductDTO addOrUpdateProduct(ProductDTO productDTO) {
+        // TODO Auto-generated method stub
+        ProductEntity productEntity = modelMapper.map(productDTO, ProductEntity.class);
         // update or add
-		productRepository.save(productEntity);
-		productDTO.setId(productDTO.getId());	
-		return productDTO;
-	}
+        productRepository.save(productEntity);
+        productDTO.setId(productDTO.getId());
+        return productDTO;
+    }
 
 
     @Override
@@ -72,8 +72,14 @@ public class ProductServiceImpl implements ProductService{
         return productDTO;
     }
 
+    @Override
+    public void deleteProductById(Long Id) {
+        productRepository.deleteById(Id);
+    }
 
-	
-	
-	
+
+
+
+
+
 }
