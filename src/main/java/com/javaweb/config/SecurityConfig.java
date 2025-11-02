@@ -68,6 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+
         return new CustomSuccessHandler();
     }
 

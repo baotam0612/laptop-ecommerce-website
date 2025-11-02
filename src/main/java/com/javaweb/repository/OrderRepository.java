@@ -1,12 +1,9 @@
 package com.javaweb.repository;
 
+import com.javaweb.entity.OrderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.javaweb.entity.ProductEntity;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
-public interface ProductRepository extends JpaRepository<ProductEntity,Long>{
-	
+public interface OrderRepository extends JpaRepository<OrderEntity,Long> {
 }

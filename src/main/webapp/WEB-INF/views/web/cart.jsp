@@ -6,17 +6,16 @@
     <meta charset="UTF-8">
     <title>Giỏ hàng của bạn</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 </head>
 <body>
-<h2 style="text-align:center; height: 100px;" >🛒 Giỏ hàng của bạn</h2>
+<h2 style="text-align:center; height: 100px;">🛒 Giỏ hàng của bạn</h2>
 
 <c:if test="${empty cartItems}">
-    <p style="text-align:center; height: 200px;" >Giỏ hàng trống!</p>
+    <p style="text-align:center; height: 200px;">Giỏ hàng trống!</p>
 </c:if>
 
 <c:if test="${not empty cartItems}">
-    <table >
+    <table border="1" style="margin:auto; text-align:center;">
         <thead>
         <tr>
             <th>Ảnh</th>
@@ -30,7 +29,7 @@
         <tbody>
         <c:forEach var="item" items="${cartItems}">
             <tr>
-                <td><img src="${item.image}" alt=""></td>
+                <td><img src="${item.image}" alt="" width="80"></td>
                 <td>${item.name}</td>
                 <td>${item.price} VND</td>
                 <td>${item.quantity}</td>
@@ -41,30 +40,47 @@
         </tbody>
     </table>
 
-    <div class="total">
-        Tổng cộng: <span id="cart-total">${total}</span> VND
+    <div class="total" style="margin-top:20px; text-align:center;">
+        <h3>Tổng cộng: <span id="cart-total">${total}</span> VND</h3>
+        <br>
+        <!-- ✅ Nút Đặt hàng -->
+        <!-- neu co tai khoan -->
+        <security:authorize access="isAuthenticated()">
+            <button id="checkout-btn" class="order-cart">🛍️ Đặt hàng</button>
+        </security:authorize>
+
+        <!-- neu khong co tai khoan -->
+        <security:authorize access="isAnonymous()">
+            <button onclick="window.location.href='/login'" class="order-cart">Đăng nhập để đặt hàng</button>
+        </security:authorize>
     </div>
 </c:if>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(".remove-btn").click(function() {
-    var productId = $(this).data("id");
 
-    $.ajax({
-        type: "POST",
-        url: "/cart/remove",
-        data: JSON.stringify({ productId: productId }),
-        contentType: "application/json",
-        dataType: "JSON",
-        success: function(res) {
-            if (res.status === "success") {
-                alert("✅ Đã xóa sản phẩm khỏi giỏ!");
-                location.reload();
+
+
+
+    $(".remove-btn").click(function() {
+        var productId = $(this).data("id");
+
+        $.ajax({
+            type: "POST",
+            url: "/cart/remove",
+            data: JSON.stringify({ productId: productId }),
+            contentType: "application/json",
+            dataType: "JSON",
+            success: function(res) {
+                if (res.status === "success") {
+                    alert("✅ Đã xóa sản phẩm khỏi giỏ!");
+                    location.reload();
+                }
             }
-        }
+        });
     });
-});
+
+
+    
 </script>
 </body>
 </html>

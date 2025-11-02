@@ -1,11 +1,7 @@
 package com.javaweb.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="product")
@@ -42,6 +38,17 @@ public class ProductEntity extends BaseEntity{
 	
 	@Column(name="imagespath")
 	private String imagespath;
+
+    public List<OrderDetailEntity> getOrderDetailEntityList() {
+        return orderDetailEntityList;
+    }
+
+    public void setOrderDetailEntityList(List<OrderDetailEntity> orderDetailEntityList) {
+        this.orderDetailEntityList = orderDetailEntityList;
+    }
+
+    @OneToMany(mappedBy = "productEntity")
+    private List<OrderDetailEntity> orderDetailEntityList;
 
 	public String getImagespath() {
 		return imagespath;

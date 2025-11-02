@@ -10,7 +10,17 @@ public class ProductDTO extends AbstractDTO<ProductDTO>{
 	private String ram;
 	private String rom;
 	private String price;
-	public String getName() {
+    private String imagespath;
+
+    public String getImagespath() {
+        return imagespath;
+    }
+
+    public void setImagespath(String imagespath) {
+        this.imagespath = imagespath;
+    }
+
+    public String getName() {
 		return name;
 	}
 	public void setName(String name) {
@@ -58,6 +68,9 @@ public class ProductDTO extends AbstractDTO<ProductDTO>{
 	public void setRom(String rom) {
 		this.rom = rom;
 	}
+
+
+
 	
 	
 	

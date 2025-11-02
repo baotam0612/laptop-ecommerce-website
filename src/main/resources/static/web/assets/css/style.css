@@ -286,13 +286,13 @@ footer .container .inner-wrap .inner-des {
 footer .container .inner-wrap .inner-des h3 {
     font-size: 22px;
     color: var(--color-four);
-    text-align: centrer;
+    text-align: center;
 }
 
 footer .container .inner-wrap .inner-des strong {
     font-size: 20px;
     color: var(--color-four);
-    text-align: centrer;
+    text-align: center;
     
 }
 
@@ -301,4 +301,14 @@ footer .container .inner-wrap .inner-des strong {
     justify-content: space-between;
     align-items: center;
     width: 25%;
+}
+
+
+.order-cart{
+    cursor: pointer;
+    background-color:#a1cdf0;
+    padding: 17px 10px;
+    border-radius: 17px;
+    margin-bottom: 50px;
+    color:#0a3151;
 }

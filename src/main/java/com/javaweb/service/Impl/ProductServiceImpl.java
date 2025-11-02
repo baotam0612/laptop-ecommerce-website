@@ -1,15 +1,5 @@
 package com.javaweb.service.Impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.javaweb.builder.ProductSearchBuilder;
 import com.javaweb.converter.ProductConverter;
 import com.javaweb.converter.ProductSearchBuilderConverter;
@@ -20,6 +10,14 @@ import com.javaweb.model.response.ProductSearchResponse;
 import com.javaweb.repository.ProductRepository;
 import com.javaweb.repository.custom.Impl.ProductRepositoryImpl;
 import com.javaweb.service.ProductService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -50,6 +48,16 @@ public class ProductServiceImpl implements ProductService{
             results.add(productConverter.toProductSearchResponse(item));
         }
         return results;
+    }
+
+    @Override
+    public List<ProductDTO> findAll() {
+        List<ProductEntity> listProductEntity = productRepositoryImpl.findAll();
+        List<ProductDTO> liDTO = new ArrayList<>();
+        for(ProductEntity item : listProductEntity){
+            liDTO.add(modelMapper.map(item,ProductDTO.class));
+        }
+        return liDTO;
     }
 
     @Override
