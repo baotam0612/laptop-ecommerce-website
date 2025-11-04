@@ -1,15 +1,13 @@
 package com.javaweb.repository.custom.Impl;
 
-import java.util.List;
+import com.javaweb.entity.UserEntity;
+import com.javaweb.repository.custom.UserRepositoryCustom;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import org.springframework.stereotype.Repository;
-
-import com.javaweb.entity.UserEntity;
-import com.javaweb.repository.custom.UserRepositoryCustom;
+import java.util.List;
 
 
 @Repository

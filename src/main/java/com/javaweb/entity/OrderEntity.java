@@ -18,8 +18,17 @@ public class OrderEntity extends BaseEntity{
     private Date date;
 
 
-    @Column(name="Customer_id")
-    private String customerId;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private CustomerEntity customer;
+
+    public CustomerEntity getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(CustomerEntity customer) {
+        this.customer = customer;
+    }
 
     @Column(name="total_amount")
     private long totalAmount;
@@ -56,13 +65,6 @@ public class OrderEntity extends BaseEntity{
         this.date = date;
     }
 
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
 
     public long getTotalAmount() {
         return totalAmount;

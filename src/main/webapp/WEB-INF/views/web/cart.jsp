@@ -80,7 +80,27 @@
     });
 
 
-    
+    $("#checkout-btn").click(function(){
+        if(!confirm("Bạn có muốn đặt hàng không? :)))!")) return;
+
+        $.ajax({
+            type: "POST",
+            url: "order/checkout",
+            contentType: "application/json",
+            data: JSON.stringify({}),
+            success: function(response){
+                if (response.status === "empty_cart") {
+                    alert("Giỏ hàng của bạn đang trống!");
+                } else if (response.status === "success") {
+                    alert("Đặt hàng thành công! Mã đơn hàng: " + response.orderId);
+                    window.location.href = "/trang-chu"; 
+                }
+            },
+            error: function(xhr){
+                alert("Có lỗi khi đặt hàng: " + xhr.responseText);
+            }
+        })
+    })
 </script>
 </body>
 </html>

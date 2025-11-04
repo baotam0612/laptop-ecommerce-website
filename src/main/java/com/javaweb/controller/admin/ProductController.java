@@ -1,9 +1,11 @@
 package com.javaweb.controller.admin;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.javaweb.entity.OrderEntity;
+import com.javaweb.model.dto.ProductDTO;
+import com.javaweb.model.request.ProductSearchRequest;
+import com.javaweb.model.response.ProductSearchResponse;
+import com.javaweb.repository.OrderRepository;
+import com.javaweb.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,16 +13,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.javaweb.model.dto.ProductDTO;
-import com.javaweb.model.request.ProductSearchRequest;
-import com.javaweb.model.response.ProductSearchResponse;
-import com.javaweb.service.ProductService;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller(value="productControllerOfAdmin")
 public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    // quan ly san pham
 	
 	@GetMapping(value="/admin/product-list")
 	public ModelAndView ProductList(@ModelAttribute ProductSearchRequest productRequest, HttpServletRequest request) {
@@ -33,8 +38,11 @@ public class ProductController {
 		mav.addObject("productList", productSearchResponse);
 		return mav;
 	}
-	
-	@GetMapping(value="/admin/product-edit")
+
+
+
+
+    @GetMapping(value="/admin/product-edit")
 	public ModelAndView ProductEdit(@ModelAttribute("modelEdit") ProductDTO productDTO,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("/admin/product-edit");
 		return mav;
@@ -48,5 +56,43 @@ public class ProductController {
         mav.addObject("modelEdit", productDTO);
         return mav;
     }
+
+    // trang quan ly don hang
+
+    @GetMapping("/admin/orders")
+    public ModelAndView viewOrders() {
+        ModelAndView mav = new ModelAndView("admin/Orders");
+        List<OrderEntity> list = orderRepository.findAll();
+        mav.addObject("orders", list);
+        return mav;
+    }
+
+    @GetMapping("/admin/order/approve/{id}")
+    public ModelAndView viewApproveOrders(@PathVariable Long id){
+        OrderEntity orderEntity = orderRepository.findById(id).orElse(null);
+        if(orderEntity!=null){
+            orderEntity.setStatus("APPROVED");
+            orderRepository.save(orderEntity);
+        }
+        ModelAndView mav = new ModelAndView("admin/Orders");
+        List<OrderEntity> list = orderRepository.findAll();
+        mav.addObject("orders", list);
+        return mav;
+    }
+
+    @GetMapping("/admin/order/cancel/{id}")
+    public ModelAndView viewCancelOrders(@PathVariable Long id){
+        OrderEntity orderEntity = orderRepository.findById(id).orElse(null);
+        if(orderEntity!=null){
+            orderEntity.setStatus("CANCELED");
+            // khong nen xoa de sau con xem hítory
+            orderRepository.save(orderEntity);
+        }
+        ModelAndView mav = new ModelAndView("admin/Orders");
+        List<OrderEntity> list = orderRepository.findAll();
+        mav.addObject("orders", list);
+        return mav;
+    }
+
 
 }

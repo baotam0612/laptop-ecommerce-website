@@ -1,14 +1,13 @@
 package com.javaweb.service.Impl;
 
-import java.math.BigDecimal;
-import java.util.*;
-import javax.servlet.http.HttpSession;
-
+import com.javaweb.entity.ProductEntity;
+import com.javaweb.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.javaweb.entity.ProductEntity;
-import com.javaweb.repository.ProductRepository;
+import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
+import java.util.*;
 
 @Service
 public class CartServiceImpl {
@@ -31,8 +30,8 @@ public class CartServiceImpl {
 
     @SuppressWarnings("unchecked")
     public List<Map<String, Object>> getCartItems(HttpSession session) {
-        Map<Long, Integer> cart = (Map<Long, Integer>) session.getAttribute(CART_SESSION_KEY);
-        if (cart == null) return Collections.emptyList();
+        Map<Long, Integer> cart = (Map<Long, Integer>) session.getAttribute("cart");
+        if (cart == null || cart.isEmpty()) return Collections.emptyList();;
 
         List<Map<String, Object>> items = new ArrayList<>();
 
@@ -44,7 +43,7 @@ public class CartServiceImpl {
                 item.put("id", product.getId());
                 item.put("name", product.getName());
 
-                // ✅ Xử lý giá: "15.990.000" → BigDecimal(15990000)
+                // Xu ly gia tien
                 String priceString = product.getPrice();
                 priceString = priceString.replace(".", "").replace(",", ".");
                 BigDecimal price = new BigDecimal(priceString);
@@ -72,7 +71,6 @@ public class CartServiceImpl {
         }
     }
 
-    // ✅ Sử dụng BigDecimal để tính tổng chính xác
     public double getTotal(HttpSession session) {
         return getCartItems(session).stream()
                 .map(i -> (BigDecimal) i.get("total"))

@@ -1,22 +1,15 @@
 package com.javaweb.repository.custom.Impl;
 
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.Optional;
+import com.javaweb.builder.ProductSearchBuilder;
+import com.javaweb.entity.ProductEntity;
+import com.javaweb.repository.ProductRepositoryCustom;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Repository;
-
-import com.javaweb.builder.ProductSearchBuilder;
-import com.javaweb.entity.ProductEntity;
-import com.javaweb.repository.ProductRepositoryCustom;
+import java.lang.reflect.Field;
+import java.util.List;
 
 @Repository
 public class ProductRepositoryImpl implements ProductRepositoryCustom{
@@ -26,7 +19,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
 
 	@Override
 	public List<ProductEntity> findAll() {
-		// TODO Auto-generated method stub
+
 		String sql = "SELECT * FROM product ";
 		Query query = entityManager.createNativeQuery(sql, ProductEntity.class); 
 		return query.getResultList();

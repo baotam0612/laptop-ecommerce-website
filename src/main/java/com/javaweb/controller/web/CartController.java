@@ -1,23 +1,17 @@
 package com.javaweb.controller.web;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
+import com.javaweb.repository.ProductRepository;
+import com.javaweb.service.Impl.CartServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.javaweb.repository.ProductRepository;
-import com.javaweb.service.Impl.CartServiceImpl;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/cart")
@@ -35,7 +29,7 @@ public class CartController {
         model.addAttribute("cartItems", cartService.getCartItems(session));
         model.addAttribute("total", cartService.getTotal(session));
         model.addAttribute("cartCount", cartService.getCartCount(session));
-        return mav; // file: /WEB-INF/views/web/cart.jsp
+        return mav;
     }
 
     // Thêm sản phẩm vào giỏ

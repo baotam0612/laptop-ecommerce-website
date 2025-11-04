@@ -1,17 +1,8 @@
 package com.javaweb.entity;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
@@ -31,8 +22,12 @@ public class UserEntity extends BaseEntity{
 	
 	@Column(name="enabled")
 	private int enabled;
-	
-	@ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private CustomerEntity customer;
+
+
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
 	private List<RoleEntity> roles = new ArrayList<RoleEntity>();
 
 	public Long getId() {
@@ -43,9 +38,16 @@ public class UserEntity extends BaseEntity{
 		this.id = id;
 	}
 
-	
 
-	public String getUserName() {
+    public CustomerEntity getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(CustomerEntity customer) {
+        this.customer = customer;
+    }
+
+    public String getUserName() {
 		return userName;
 	}
 
