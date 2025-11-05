@@ -39,6 +39,11 @@
                     <label>bộ nhớ tạm(ram)</label>
                     <form:input class="form-control" path="ram"/>
                 </div>
+                <div class="form-group">
+                <label>Ảnh sản phẩm</label>
+                <input type="file" id="imageFile" name="imageFile" accept="image/*" />
+                <img id="previewImage" src="#" alt="Preview" style="max-width: 200px; display:none; margin-top:10px;" />
+                </div>
                 <c:if test="${not empty modelEdit.id}">
                  <div class="form-button">
                     <div class="addProduct" id="btnAddOrUpdateProduct">

@@ -44,17 +44,17 @@
                 <div class="form-button">
                     <div class="search" id="btnSearchProduct">
                         <button>Tìm kiếm</button>
-                    </div>  
-                    </div>  
-                    </form:form>           
+                    </div>
+                    </div>
+                    </form:form>
                         <div class="edit" id="btnEditProduct">
                          <a href="/admin/product-edit">
                             <button>Chỉnh Sửa</button>
                             </a>
-                        </div>                  
-                
-                
-                
+                        </div>
+
+
+
             </div>
 
         </div>

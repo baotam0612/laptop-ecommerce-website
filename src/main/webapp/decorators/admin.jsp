@@ -67,7 +67,7 @@
             background-color: var(--color-one);
             border-radius: 8px;
         }
-        
+
         .form-button .addProduct button {
             margin-top: 20px;
             padding: 10px 20px;

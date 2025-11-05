@@ -20,4 +20,13 @@
     <decorator name="login" page="login.jsp">
         <pattern>/login</pattern>
     </decorator>
+
+    <decorator name="forgot" page="forgot.jsp">
+    <pattern>/forgot-password</pattern>
+    </decorator>
+
+    <decorator name="reset" page="reset.jsp">
+        <pattern>/reset-password</pattern>
+    </decorator>
+
 </decorators>

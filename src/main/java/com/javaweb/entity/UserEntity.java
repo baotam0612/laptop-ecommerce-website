@@ -23,6 +23,10 @@ public class UserEntity extends BaseEntity{
 	@Column(name="enabled")
 	private int enabled;
 
+    @Column(name="email")
+    private String email;
+
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private CustomerEntity customer;
 
@@ -38,6 +42,13 @@ public class UserEntity extends BaseEntity{
 		this.id = id;
 	}
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public CustomerEntity getCustomer() {
         return customer;
