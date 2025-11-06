@@ -8,6 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+<style>
+    .deleteProduct button{
+    margin-top: 20px;
+    padding: 10px 26px;
+    background-color: var(--color-one);
+    border-radius: 8px;
+    }
+</style>
 <div class="flex-fill p-3">
             <div class="main-container">
             <form:form modelAttribute="modelEdit" id="editForm"  method="GET">
@@ -49,9 +57,6 @@
                     <div class="addProduct" id="btnAddOrUpdateProduct">
                         <button>Sửa sản phẩm</button>
                     </div>
-                    <div class="deleteProduct" id="btnDeleteProduct">
-                        <button>Xóa sản phẩm</button>
-                    </div>
 
 
                 </div>
@@ -63,9 +68,7 @@
                     </div>
 
                     </div>
-                    <div class="deleteProduct" id="btnDeleteProduct">
-                        <button>Xóa sản phẩm</button>
-                    </div>
+
                 </div>
 </c:if>
                  <form:hidden path="id"/>
