@@ -4,11 +4,13 @@ import com.javaweb.entity.ProductEntity;
 import com.javaweb.entity.RoleEntity;
 import com.javaweb.entity.UserEntity;
 import com.javaweb.model.dto.ProductDTO;
+import com.javaweb.model.dto.ProductFilterDTO;
 import com.javaweb.repository.ProductRepository;
 import com.javaweb.repository.RoleRepository;
 import com.javaweb.repository.UserRepository;
 import com.javaweb.repository.custom.Impl.ProductRepositoryImpl;
 import com.javaweb.service.Impl.ProductServiceImpl;
+import com.javaweb.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,11 +24,23 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller(value = "homeController")
 public class HomeController {
+    static long parsePrice(String price) {
+        if (price == null || price.isEmpty()) return 0L;
+        try {
+            // Xóa dấu chấm và các ký tự không phải số
+            String numeric = price.replaceAll("[^0-9]", "");
+            return Long.parseLong(numeric);
+        } catch (NumberFormatException e) {
+            return 0L;
+        }
+    }
 	
 	@Autowired
 	private ProductRepositoryImpl productRepository;
@@ -45,6 +59,9 @@ public class HomeController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private ProductService productService;
+
 
     @GetMapping(value = "/trang-chu")
     public ModelAndView homePage(HttpServletRequest request) {
@@ -60,11 +77,48 @@ public class HomeController {
         return mav;
     }
 
-    @GetMapping(value="/san-pham")
-    public ModelAndView productPage(HttpServletRequest request) {
+    // bo loc trang product
+    @GetMapping("/product")
+    public ModelAndView viewProducts() {
+        List<ProductDTO> listProduct = productService.findAll();
         ModelAndView mav = new ModelAndView("web/product");
-        List<ProductDTO> liProductDTO = productServiceImpl.findAll();
-        mav.addObject("liProducts", liProductDTO);
+        mav.addObject("liProducts", listProduct);
+        mav.addObject("filter", new ProductFilterDTO()); // ✅ thêm dòng này
+        return mav;
+    }
+
+
+    @GetMapping("/product/filter")
+    public ModelAndView filterProducts(@ModelAttribute("filter") ProductFilterDTO productFilterDTO) {
+        List<ProductDTO> listProduct = productService.findAll();
+
+        if (productFilterDTO.getKeyword() != null && !productFilterDTO.getKeyword().trim().isEmpty()) {
+            listProduct = listProduct.stream()
+                    .filter(p -> p.getName().toLowerCase().contains(productFilterDTO.getKeyword().toLowerCase()))
+                    .collect(Collectors.toList());
+        }
+
+        if (productFilterDTO.getCategory() != null && !productFilterDTO.getCategory().trim().isEmpty()) {
+            listProduct = listProduct.stream()
+                    .filter(p -> p.getCategory() != null && p.getCategory().equalsIgnoreCase(productFilterDTO.getCategory()))
+                    .collect(Collectors.toList());
+        }
+
+        if (productFilterDTO.getSort() != null && !productFilterDTO.getSort().isEmpty()) {
+            if (productFilterDTO.getSort().equals("priceAsc")) {
+                listProduct.sort(Comparator.comparingLong(p -> parsePrice(p.getPrice())));
+            } else if (productFilterDTO.getSort().equals("priceDesc")) {
+                listProduct.sort(Comparator.comparingLong((ProductDTO p) -> parsePrice(p.getPrice())).reversed());
+            }
+        }
+
+
+
+
+
+        ModelAndView mav = new ModelAndView("web/product");
+        mav.addObject("liProducts", listProduct);
+        mav.addObject("filter", productFilterDTO); // để form giữ lại giá trị
         return mav;
     }
 

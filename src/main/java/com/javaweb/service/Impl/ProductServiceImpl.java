@@ -85,9 +85,26 @@ public class ProductServiceImpl implements ProductService{
         productRepository.deleteById(Id);
     }
 
+    @Override
+    public List<ProductDTO> findByName(String name) {
+        List<ProductEntity> liProductEntity = productRepository.findByName(name);
+        List<ProductDTO> liDTO = new ArrayList<>();
+        for(ProductEntity item : liProductEntity){
+            liDTO.add(modelMapper.map(item,ProductDTO.class));
+        }
+        return liDTO;
 
+    }
 
-
+    @Override
+    public List<ProductDTO> findByCategory(String category) {
+        List<ProductEntity> liProductEntity = productRepository.findByCategory(category);
+        List<ProductDTO> liDTO = new ArrayList<>();
+        for(ProductEntity item : liProductEntity){
+            liDTO.add(modelMapper.map(item,ProductDTO.class));
+        }
+        return liDTO;
+    }
 
 
 }

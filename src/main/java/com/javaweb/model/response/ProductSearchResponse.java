@@ -12,6 +12,17 @@ public class ProductSearchResponse extends AbstractDTO {
 	private String rom;
 	private String ram;
 	private String price;
+
+    public String getImagespath() {
+        return imagespath;
+    }
+
+    public void setImagespath(String imagespath) {
+        this.imagespath = imagespath;
+    }
+
+    private String imagespath;
+
 	public String getName() {
 		return name;
 	}

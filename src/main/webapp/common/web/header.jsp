@@ -17,7 +17,7 @@
             <div class="inner-item">
                 <ul>
                     <li><a href="/gioi-thieu">Giới thiệu</a></li>
-                    <li><a href="/san-pham">Sản phẩm</a></li>
+                    <li><a href="/product">Sản phẩm</a></li>
                     <li><a href="/tin-tuc">Tin tức</a></li>
                     <li><a href="/khuyen-mai">Khuyến mãi</a></li>
                 </ul>
