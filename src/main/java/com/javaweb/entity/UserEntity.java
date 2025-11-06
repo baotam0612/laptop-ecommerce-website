@@ -31,10 +31,18 @@ public class UserEntity extends BaseEntity{
     private CustomerEntity customer;
 
 
-    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
-	private List<RoleEntity> roles = new ArrayList<RoleEntity>();
 
-	public Long getId() {
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "userroles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<RoleEntity> roles = new ArrayList<>();
+
+
+
+    public Long getId() {
 		return id;
 	}
 
@@ -74,19 +82,15 @@ public class UserEntity extends BaseEntity{
 		this.passWord = passWord;
 	}
 
-	public int getEnabled() {
-		return enabled;
-	}
+    public int getEnabled() {
+        return enabled;
+    }
 
-	public int isEnabled() {
-		return enabled;
-	}
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
 
-	public void setEnabled(int enabled) {
-		this.enabled = enabled;
-	}
-
-	public List<RoleEntity> getRoles() {
+    public List<RoleEntity> getRoles() {
 		return roles;
 	}
 

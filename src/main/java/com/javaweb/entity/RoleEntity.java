@@ -1,17 +1,8 @@
 package com.javaweb.entity;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
 @Entity
 @Table(name="roles")
@@ -27,14 +18,14 @@ public class RoleEntity extends BaseEntity{
 	
 	@Column(name="code", nullable = false, unique = true)
 	private String code;
-	
-	@ManyToMany
-	@JoinTable(name="userroles",
-	            joinColumns = @JoinColumn(name="role_id", nullable = false),
-	            inverseJoinColumns = @JoinColumn(name="user_id", nullable = false))
-	private List<UserEntity> users = new ArrayList<UserEntity>();
 
-	public Long getId() {
+
+    @ManyToMany(mappedBy = "roles")
+    private List<UserEntity> users = new ArrayList<>();
+
+
+
+    public Long getId() {
 		return id;
 	}
 

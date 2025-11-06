@@ -1,19 +1,22 @@
 package com.javaweb.controller.web;
 
 import com.javaweb.entity.ProductEntity;
+import com.javaweb.entity.RoleEntity;
+import com.javaweb.entity.UserEntity;
 import com.javaweb.model.dto.ProductDTO;
 import com.javaweb.repository.ProductRepository;
+import com.javaweb.repository.RoleRepository;
+import com.javaweb.repository.UserRepository;
 import com.javaweb.repository.custom.Impl.ProductRepositoryImpl;
 import com.javaweb.service.Impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +35,15 @@ public class HomeController {
 
     @Autowired
     private ProductServiceImpl productServiceImpl;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @GetMapping(value = "/trang-chu")
@@ -83,6 +95,44 @@ public class HomeController {
 		}
 		return new ModelAndView("redirect:/trang-chu");
 	}
+
+    @GetMapping("/sign-in")
+    public ModelAndView signin() {
+        ModelAndView mav = new ModelAndView("signin");
+        return mav;
+
+    }
+
+    @PostMapping("/sign-in")
+    public String register(@RequestParam("username") String username,
+                           @RequestParam("email") String email,
+                           @RequestParam("password") String password,
+                           @RequestParam("confirmPassword") String confirmPassword,
+                           Model model) {
+
+        if (!password.equals(confirmPassword)) {
+            model.addAttribute("error", "Mật khẩu xác nhận không khớp!");
+            return "SignIn";
+        }
+
+        if (userRepository.findByEmail(email) != null) {
+            model.addAttribute("error", "Email đã được sử dụng!");
+            return "SignIn";
+        }
+
+        //set role = "USER", add user vao DB
+        UserEntity user = new UserEntity();
+        RoleEntity userRole = roleRepository.findOneByCode("USER");
+        user.getRoles().add(userRole);
+        user.setUserName(username);
+        user.setEmail(email);
+        user.setEnabled(1);
+        user.setPassWord(passwordEncoder.encode(password));
+        userRepository.save(user);
+        model.addAttribute("message", "Đăng ký thành công! Hãy đăng nhập.");
+        return "login";
+    }
+
 
     @GetMapping(value="/product/item-{id}")
     public ModelAndView itemPage(@PathVariable("id") Long Id, HttpServletRequest request) {

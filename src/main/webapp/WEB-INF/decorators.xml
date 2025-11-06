@@ -29,4 +29,9 @@
         <pattern>/reset-password</pattern>
     </decorator>
 
+    <decorator name="signin" page="SignIn.jsp">
+        <pattern>/sign-in</pattern>
+    </decorator>
+
+
 </decorators>

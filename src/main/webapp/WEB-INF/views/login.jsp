@@ -134,8 +134,8 @@
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control" id="userName" name="j_username"
                                             placeholder="name@example.com" required>
-                                        <label for="email">Email</label>
-                                        <div class="invalid-feedback">Vui lòng nhập email hợp lệ.</div>
+                                        <label for="email">Tên đăng nhập</label>
+                                        <div class="invalid-feedback">Vui lòng nhập tên đăng nhập hợp lệ.</div>
                                     </div>
 
                                     <div class="form-floating mb-3">

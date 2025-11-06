@@ -30,7 +30,7 @@
             <div class="inner-login">
                 <security:authorize access = "isAnonymous()">
 						 <button><a href="/login">Đăng nhập</a></button>
-                <button><a href="">Đăng ký</a></button>
+                <button><a href="/sign-in">Đăng ký</a></button>
 					</security:authorize>
 					<security:authorize access = "isAuthenticated()">
 						 <button><a href="/login">Xin chào,<%=SecurityUtils.getPrincipal().getUserName()%></a></button>
