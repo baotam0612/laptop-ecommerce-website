@@ -23,11 +23,15 @@ public class CartController {
     @Autowired
     private CartServiceImpl cartService;
 
+    // giao diện phần giỏ hàng
     @GetMapping
     public ModelAndView viewCart(Model model, HttpSession session) {
         ModelAndView mav = new ModelAndView("web/cart");
+        // san pham gio hang
         model.addAttribute("cartItems", cartService.getCartItems(session));
+        // tổng tiền trả về Long
         model.addAttribute("total", cartService.getTotal(session));
+        // số lượng
         model.addAttribute("cartCount", cartService.getCartCount(session));
         return mav;
     }
@@ -51,6 +55,7 @@ public class CartController {
     }
 
 
+    // xóa giỏ hàng
     @PostMapping("/remove")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> removeFromCart(@RequestBody Map<String, Object> data, HttpSession session) {

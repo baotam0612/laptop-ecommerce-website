@@ -17,7 +17,7 @@ public class CartServiceImpl {
     @Autowired
     private ProductRepository productRepository;
 
-    @SuppressWarnings("unchecked")
+
     public void addToCart(Long productId, int quantity, HttpSession session) {
         Map<Long, Integer> cart = (Map<Long, Integer>) session.getAttribute(CART_SESSION_KEY);
         if (cart == null) {
@@ -29,6 +29,7 @@ public class CartServiceImpl {
     }
 
     @SuppressWarnings("unchecked")
+    // thành phần giỏ hàng
     public List<Map<String, Object>> getCartItems(HttpSession session) {
         Map<Long, Integer> cart = (Map<Long, Integer>) session.getAttribute("cart");
         if (cart == null || cart.isEmpty()) return Collections.emptyList();;
@@ -63,6 +64,7 @@ public class CartServiceImpl {
     }
 
     @SuppressWarnings("unchecked")
+    // xóa ở giỏ hàng
     public void removeFromCart(Long productId, HttpSession session) {
         Map<Long, Integer> cart = (Map<Long, Integer>) session.getAttribute(CART_SESSION_KEY);
         if (cart != null) {
@@ -71,13 +73,15 @@ public class CartServiceImpl {
         }
     }
 
-    public double getTotal(HttpSession session) {
+    // Chuyển từ dẹmcal(db) về long(reponse giao diện)
+    public long getTotal(HttpSession session) {
         return getCartItems(session).stream()
                 .map(i -> (BigDecimal) i.get("total"))
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
-                .doubleValue();
+                .longValue();
     }
 
+    // số lượng
     public int getCartCount(HttpSession session) {
         Map<Long, Integer> cart = (Map<Long, Integer>) session.getAttribute(CART_SESSION_KEY);
         if (cart == null) return 0;

@@ -66,18 +66,20 @@ public class HomeController {
     @GetMapping(value = "/trang-chu")
     public ModelAndView homePage(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("web/home");
+        //  tìm tất cả sản phẩm trong product
         List<ProductEntity> res = productRepository.findAll();
         mav.addObject("products", res);
         return mav;
     }
 
+    // trang gthieu
     @GetMapping(value="/gioi-thieu")
     public ModelAndView introducePage(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("web/introduce");
         return mav;
     }
 
-    // bo loc trang product
+    // trang sản phẩm
     @GetMapping("/product")
     public ModelAndView viewProducts() {
         List<ProductDTO> listProduct = productService.findAll();
@@ -87,23 +89,26 @@ public class HomeController {
         return mav;
     }
 
-
+    // bo loc trang product
     @GetMapping("/product/filter")
     public ModelAndView filterProducts(@ModelAttribute("filter") ProductFilterDTO productFilterDTO) {
         List<ProductDTO> listProduct = productService.findAll();
 
+        // tìm tên sản phẩm
         if (productFilterDTO.getKeyword() != null && !productFilterDTO.getKeyword().trim().isEmpty()) {
             listProduct = listProduct.stream()
                     .filter(p -> p.getName().toLowerCase().contains(productFilterDTO.getKeyword().toLowerCase()))
                     .collect(Collectors.toList());
         }
 
+        // lọc theo loại
         if (productFilterDTO.getCategory() != null && !productFilterDTO.getCategory().trim().isEmpty()) {
             listProduct = listProduct.stream()
                     .filter(p -> p.getCategory() != null && p.getCategory().equalsIgnoreCase(productFilterDTO.getCategory()))
                     .collect(Collectors.toList());
         }
 
+        // sắp xếp
         if (productFilterDTO.getSort() != null && !productFilterDTO.getSort().isEmpty()) {
             if (productFilterDTO.getSort().equals("priceAsc")) {
                 listProduct.sort(Comparator.comparingLong(p -> parsePrice(p.getPrice())));
@@ -188,6 +193,7 @@ public class HomeController {
     }
 
 
+    // trang sản phẩm riêng
     @GetMapping(value="/product/item-{id}")
     public ModelAndView itemPage(@PathVariable("id") Long Id, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("/web/item");
