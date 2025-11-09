@@ -16,6 +16,7 @@
             <h4 class="text-center mb-4">Dashboard</h4>
             <a href="/admin/product-list" class="active">Quản lý sản phẩm</a>
             <a href="/admin/orders">Quản lý đơn hàng</a>
+            <a href="/admin/users">Quản lý tài khoản</a>
         </div>
 
         <!-- Content -->

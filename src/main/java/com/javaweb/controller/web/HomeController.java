@@ -1,10 +1,12 @@
 package com.javaweb.controller.web;
 
+import com.javaweb.entity.CustomerEntity;
 import com.javaweb.entity.ProductEntity;
 import com.javaweb.entity.RoleEntity;
 import com.javaweb.entity.UserEntity;
 import com.javaweb.model.dto.ProductDTO;
 import com.javaweb.model.dto.ProductFilterDTO;
+import com.javaweb.repository.CustomerRepository;
 import com.javaweb.repository.ProductRepository;
 import com.javaweb.repository.RoleRepository;
 import com.javaweb.repository.UserRepository;
@@ -24,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +34,7 @@ import java.util.stream.Collectors;
 
 @Controller(value = "homeController")
 public class HomeController {
+
     static long parsePrice(String price) {
         if (price == null || price.isEmpty()) return 0L;
         try {
@@ -61,6 +65,14 @@ public class HomeController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+
+
+
+
 
 
     @GetMapping(value = "/trang-chu")
@@ -162,12 +174,16 @@ public class HomeController {
 
     }
 
+    @Transactional
     @PostMapping("/sign-in")
     public String register(@RequestParam("username") String username,
                            @RequestParam("email") String email,
                            @RequestParam("password") String password,
                            @RequestParam("confirmPassword") String confirmPassword,
-                           Model model) {
+                           @RequestParam("fullName") String fullName,
+                            @RequestParam("address") String address,
+                            @RequestParam("phoneNumber") String phoneNumber,
+                            Model model) {
 
         if (!password.equals(confirmPassword)) {
             model.addAttribute("error", "Mật khẩu xác nhận không khớp!");
@@ -187,7 +203,23 @@ public class HomeController {
         user.setEmail(email);
         user.setEnabled(1);
         user.setPassWord(passwordEncoder.encode(password));
+
+        CustomerEntity customerEntity = new CustomerEntity();
+        customerEntity.setFullName(fullName);
+        customerEntity.setAddress(address);
+        customerEntity.setPhone(phoneNumber);
+        customerEntity.setEmail(email);
+
+        // set cả 2 chiều
+        customerEntity.setUser(user);
+        user.setCustomer(customerEntity);
+
         userRepository.save(user);
+        // nếu sử dụng sẽ lỗi đồng bộ vì dùng cascade rồi nó sẽ tự build table có quan hệ
+//        customerRepository.save(customerEntity);
+
+
+
         model.addAttribute("message", "Đăng ký thành công! Hãy đăng nhập.");
         return "login";
     }

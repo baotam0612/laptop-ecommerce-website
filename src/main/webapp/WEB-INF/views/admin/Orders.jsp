@@ -142,7 +142,7 @@
                     <td>
                         <c:choose>
                             <c:when test="${o.customer != null}">
-                                ${o.customer.userName}
+                                ${o.customer.fullName}
                             </c:when>
                             <c:otherwise><em>Chưa có</em></c:otherwise>
                         </c:choose>

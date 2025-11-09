@@ -49,7 +49,7 @@ public class UserService implements IUserService{
         resetToken.setExpiryDate(LocalDateTime.now().plusMinutes(15));
         tokenRepository.save(resetToken);
 
-        String link = "http://localhost:8081/reset-password?token=" + token;
+        String link = "http://localhost:8080/reset-password?token=" + token;
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);

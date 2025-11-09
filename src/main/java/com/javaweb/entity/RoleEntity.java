@@ -23,43 +23,37 @@ public class RoleEntity extends BaseEntity{
     @ManyToMany(mappedBy = "roles")
     private List<UserEntity> users = new ArrayList<>();
 
-
-
+    @Override
     public Long getId() {
-		return id;
-	}
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String code) {
-		this.code = code;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public List<UserEntity> getUsers() {
-		return users;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public void setUsers(List<UserEntity> users) {
-		this.users = users;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    public List<UserEntity> getUsers() {
+        return users;
+    }
 
-	public String getName() {
-		return name;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-	
-	
+    public void setUsers(List<UserEntity> users) {
+        this.users = users;
+    }
 }

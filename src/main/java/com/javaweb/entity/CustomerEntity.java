@@ -12,13 +12,16 @@ public class CustomerEntity {
     private Long id;
 
     @Column(name="full_name", nullable=false, unique=true)
-    private String userName;
+    private String fullName;
 
     @Column(name = "address")
     private String address;
 
     @Column(name = "phone")
     private String phone;
+
+    @Column(name = "email")
+    private String email;
 
     @OneToOne
     @JoinColumn(name = "user_id")
@@ -28,16 +31,24 @@ public class CustomerEntity {
         return id;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getAddress() {
