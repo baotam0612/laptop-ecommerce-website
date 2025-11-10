@@ -77,31 +77,65 @@
             </div>
 
 
-        
-        <script >
-              $('#btnAddOrUpdateProduct').click(function(){
-            	  var data = {};
-            	  var formData = $('#editForm').serializeArray();
-            	  $.each(formData, function(i,v) {
-              		data[""+v.name+""] = v.value;
-              	   });
-            	  
-            	  
-            	  $.ajax({
-            		  type:"POST",
-            		  url: "/api/product",
-            		  data: JSON.stringify(data),
-            		  contentType: "application/json",
-      					dataType: "JSON",
-      					success: function (respond) {
-      					console.log("OK");
-   		   			},
-      					error: function (respond) {
-      					console.log("failed");
-      				}
-         		   	  });
-              });
-        
-        </script>
+
+<script >
+    $('#btnAddOrUpdateProduct').click(function () {
+        event.preventDefault();
+        const file = $('#imageFile')[0].files[0];
+        if (file) {
+            // upload len cloud
+            const formData = new FormData();
+            formData.append("imageFile", file);
+
+            $.ajax({
+                url: "/api/product/upload-image",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    if (res.status === "success") {
+                        sendProductData(res.imageUrl);
+                    }
+                },
+                error: function (err) {
+                    console.log("Upload lỗi", err);
+                }
+            });
+        } else {
+            sendProductData(null);
+        }
+    });
+
+    function sendProductData(imageUrl) {
+        const product = {
+            id: $('input[name="id"]').val(),
+            name: $('input[name="name"]').val(),
+            category: $('input[name="category"]').val(),
+            brand: $('input[name="brand"]').val(),
+            cpu: $('input[name="cpu"]').val(),
+            gpu: $('input[name="gpu"]').val(),
+            rom: $('input[name="rom"]').val(),
+            ram: $('input[name="ram"]').val(),
+            price: $('input[name="price"]').val(),
+            imagespath: imageUrl
+        };
+
+        $.ajax({
+            url: "/api/product",
+            type: "POST",
+            data: JSON.stringify(product),
+            contentType: "application/json",
+            success: function (res) {
+                console.log("Lưu thành công:", res);
+            },
+            error: function (err) {
+                console.log("Lưu thất bại:", err);
+            }
+        });
+    }
+
+
+</script>
 </body>
 </html>
