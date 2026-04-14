@@ -108,7 +108,7 @@
     	$.each(formData, function(i,v) {
     		data[""+v.name+""] = v.value;
     	});
-    	console.log("ok");
+    	console.log(data);
 
     	$.ajax({
 			type: "POST",

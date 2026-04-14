@@ -1,4 +1,11 @@
-package com.javaweb.controller.admin;
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <style>
+    .code { font: 12px/18px 'Courier New', monospace; fill: #111; }
+  </style>
+  <foreignObject x="10" y="10" width="1180" height="1580">
+    <body xmlns="http://www.w3.org/1999/xhtml">
+      <pre class="code">package com.javaweb.controller.admin;
 
 import com.javaweb.entity.OrderEntity;
 import com.javaweb.entity.RoleEntity;
@@ -22,9 +29,9 @@ import java.util.List;
 
 @Controller(value="productControllerOfAdmin")
 public class ProductController {
-	
-	@Autowired
-	private ProductService productService;
+    
+    @Autowired
+    private ProductService productService;
 
     @Autowired
     private OrderRepository orderRepository;
@@ -37,27 +44,27 @@ public class ProductController {
     private RoleRepositoryImpl roleRepositoryImpl;
 
     // quan ly san pham
-	
-	@GetMapping(value="/admin/product-list")
-	public ModelAndView ProductList(@ModelAttribute ProductSearchRequest productRequest, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("/admin/product-list");
-		// tra ra du lieu jsp sau khi nhap tren view
-		mav.addObject("modelSearch", productRequest);
-		List<ProductSearchResponse> lists = productService.findAll(productRequest);
-		ProductSearchResponse productSearchResponse = new ProductSearchResponse();
-		productSearchResponse.setListResult(lists);
-		mav.addObject("productList", productSearchResponse);
-		return mav;
-	}
+    
+    @GetMapping(value="/admin/product-list")
+    public ModelAndView ProductList(@ModelAttribute ProductSearchRequest productRequest, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("/admin/product-list");
+        // tra ra du lieu jsp sau khi nhap tren view
+        mav.addObject("modelSearch", productRequest);
+        List<ProductSearchResponse> lists = productService.findAll(productRequest);
+        ProductSearchResponse productSearchResponse = new ProductSearchResponse();
+        productSearchResponse.setListResult(lists);
+        mav.addObject("productList", productSearchResponse);
+        return mav;
+    }
 
 
 
 
     @GetMapping(value="/admin/product-edit")
-	public ModelAndView ProductEdit(@ModelAttribute("modelEdit") ProductDTO productDTO,HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("/admin/product-edit");
-		return mav;
-	}
+    public ModelAndView ProductEdit(@ModelAttribute("modelEdit") ProductDTO productDTO,HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("/admin/product-edit");
+        return mav;
+    }
 
     @GetMapping(value="/admin/product-edit-{id}")
     public ModelAndView ProductEdit(@PathVariable("id") Long Id, HttpServletRequest request) {
@@ -119,11 +126,6 @@ public class ProductController {
     public ModelAndView editUsers(@PathVariable Long id){
         UserEntity userEntity = userRepository.findById(id).orElse(null);
         List<RoleEntity> roles = roleRepository.findAll();
-        for(RoleEntity roleEntity : roles){
-            if(roleEntity.getName().equals("USER")){
-                roleEntity.setName("ADMIN");
-            }
-        }
         ModelAndView mav = new ModelAndView("admin/user-edit");
         mav.addObject("user", userEntity);
         mav.addObject("roles", roles);
@@ -137,22 +139,10 @@ public class ProductController {
         UserEntity userEntity = userRepository.findById(id).orElse(null);
         if(userEntity!=null){
             List<RoleEntity> roles = new ArrayList<>();
-            if(roleIds.size()>1){
-                for(Long it :  roleIds){
-                    if(it==1){
-                        RoleEntity roleEntity = roleRepositoryImpl.findByIdImpl(it);
-                        roles.add(roleEntity);
-                    }
-                }
+            for(Long it :  roleIds){
+                RoleEntity roleEntity = roleRepositoryImpl.findByIdImpl(it);
+                roles.add(roleEntity);
             }
-            else{
-                for(Long it :  roleIds){
-
-                        RoleEntity roleEntity = roleRepositoryImpl.findByIdImpl(it);
-                        roles.add(roleEntity);
-                }
-            }
-
             userEntity.setRoles(roles);
             userRepository.save(userEntity);
 
@@ -168,3 +158,7 @@ public class ProductController {
 
 
 }
+</pre>
+    </body>
+  </foreignObject>
+</svg>

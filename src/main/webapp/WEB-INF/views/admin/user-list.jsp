@@ -142,6 +142,7 @@
                     <td>${user.id}</td>
                     <td>${user.userName}</td>
                     <td>${user.email}</td>
+
                     <td>
                         <c:forEach var="role" items="${user.roles}">
                             <span class="badge <c:choose>
@@ -151,10 +152,15 @@
                         </c:forEach>
                     </td>
                     <td>
-                        <a href="<c:url value='/admin/users/edit/${user.id}'/>" class="btn btn-edit">Sửa</a>
+                        <c:if test='SecurityUtils.getPrincipal().getUserName()=="admin"'>
+                        <c:forEach var="role" items="${user.roles}">
+                        <c:if test='${user.roles.code == "USER"}'><a href="<c:url value='/admin/users/edit/${user.id}'/>" class="btn btn-edit">Sửa</a>
                         <a href="<c:url value='/admin/users/delete/${user.id}'/>"
                            onclick="return confirm('Bạn có chắc muốn xóa tài khoản này?')"
-                           class="btn btn-delete">Xóa</a>
+                           class="btn btn-delete">Xóa</a></c:if>
+                            </c:forEach>
+</c:if>
+
                     </td>
                 </tr>
             </c:forEach>

@@ -1,4 +1,11 @@
-package com.javaweb.config;
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1200">
+  <rect width="100%" height="100%" fill="#f2f7ff"/>
+  <style>
+    .code { font: 12px/18px 'Courier New', monospace; fill: #000; }
+  </style>
+  <foreignObject x="10" y="10" width="980" height="1180">
+    <body xmlns="http://www.w3.org/1999/xhtml">
+      <pre class="code">package com.javaweb.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,34 +26,32 @@ import com.javaweb.service.Impl.CustomUserDetailsService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
-	
-	@Bean
-	public UserDetailsService userDetailsService() {
-		return new CustomUserDetailsService();
-	}
-
-    // thuat toan ma hoa mat khau(hash)
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
-
-    // xac thuc usser
-	@Bean
-	public DaoAuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-		authProvider.setUserDetailsService(userDetailsService());
-		authProvider.setPasswordEncoder(passwordEncoder());
-		return authProvider;
-	}
-	
-	  @Bean
-	    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception{
-	    	return authConfig.getAuthenticationManager();
-	    }
-	
-	
-	@Override
+    
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new CustomUserDetailsService();
+    }
+    
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+    
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+    
+      @Bean
+        public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception{
+            return authConfig.getAuthenticationManager();
+        }
+    
+    
+    @Override
     protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authenticationProvider());
     }
@@ -56,9 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 http.csrf().disable()
                 .authorizeRequests()
                         //.antMatchers("/admin/building-edit").hasAnyRole("MANAGER")
-                        // ROLE_ADMIN
                         .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                        // ALL
                         .antMatchers("/login", "/resource/**", "/trang-chu", "/api/**").permitAll()
                 .and()
                 .formLogin().loginPage("/login").usernameParameter("j_username").passwordParameter("j_password").permitAll()
@@ -69,9 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .and().exceptionHandling().accessDeniedPage("/access-denied").and()
                 .sessionManagement().maximumSessions(1).expiredUrl("/login?sessionTimeout");
     }
-
-
-    // khi login thanh cong => chuyen huong
+    
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
 
@@ -79,3 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
 }
+</pre>
+    </body>
+  </foreignObject>
+</svg>

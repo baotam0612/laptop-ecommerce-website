@@ -43,7 +43,7 @@
     <div class="total" style="margin-top:20px; text-align:center;">
         <h3>Tổng cộng: <span id="cart-total">${total}</span> VND</h3>
         <br>
-        <!-- ✅ Nút Đặt hàng -->
+
         <!-- neu co tai khoan -->
         <security:authorize access="isAuthenticated()">
             <button id="checkout-btn" class="order-cart">🛍️ Đặt hàng</button>

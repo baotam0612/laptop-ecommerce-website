@@ -41,7 +41,11 @@
         var data = {};
         var formData = $('#cartForm').serializeArray();
         $.each(formData, function(i, v) {
+            if(v.value > 10) {
+                v.value = 10;
+            }
             data[v.name] = v.value;
+
         });
 
         console.log("📦 Dữ liệu gửi:", data);

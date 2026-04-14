@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long>{
-     UserEntity findIdByUserName(String username);
+   UserEntity findIdByUserName(String username);
 
     UserEntity findOneByUserNameAndEnabled(String userName, int enabled);
 

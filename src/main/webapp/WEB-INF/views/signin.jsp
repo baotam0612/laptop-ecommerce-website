@@ -34,7 +34,7 @@
             <div class="card p-4 rounded-4 shadow-lg custom-card" style="width:420px;">
                 <h3 class="text-center mb-4 card-header-text">📝 Đăng ký tài khoản</h3>
 
-                <%-- Thông báo --%>
+
                 <% if (request.getAttribute("message") != null) { %>
                 <div class="alert alert-success text-center fw-semibold">
                     <%= request.getAttribute("message") %>

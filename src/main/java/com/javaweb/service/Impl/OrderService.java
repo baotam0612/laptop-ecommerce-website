@@ -81,6 +81,8 @@ public class OrderService {
         // them don hang
         orderRepository.save(order);
 
+
+
         // xoa gio hang
         session.removeAttribute("cart");
 

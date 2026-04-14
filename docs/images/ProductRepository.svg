@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="220">
+  <rect width="100%" height="100%" fill="#fff"/>
+  <style>
+    .code { font: 12px/18px 'Courier New', monospace; fill: #111; }
+  </style>
+  <foreignObject x="10" y="10" width="780" height="200">
+    <body xmlns="http://www.w3.org/1999/xhtml">
+      <pre class="code">package com.javaweb.repository;
+
+import com.javaweb.entity.ProductEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+
+@Repository
+public interface ProductRepository extends JpaRepository<ProductEntity,Long>{
+    List<ProductEntity> findByName(String name);
+    List<ProductEntity> findByCategory(String category);
+}
+</pre>
+    </body>
+  </foreignObject>
+</svg>

@@ -112,6 +112,9 @@ public class HomeController {
                     .filter(p -> p.getName().toLowerCase().contains(productFilterDTO.getKeyword().toLowerCase()))
                     .collect(Collectors.toList());
         }
+        if (productFilterDTO.getCategory() != null && !productFilterDTO.getCategory().trim().isEmpty()) {
+
+        }
 
         // lọc theo loại
         if (productFilterDTO.getCategory() != null && !productFilterDTO.getCategory().trim().isEmpty()) {

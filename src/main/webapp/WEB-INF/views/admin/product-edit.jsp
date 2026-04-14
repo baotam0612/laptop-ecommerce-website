@@ -128,6 +128,7 @@
             contentType: "application/json",
             success: function (res) {
                 console.log("Lưu thành công:", res);
+                window.alert("Thanh Cong");
             },
             error: function (err) {
                 console.log("Lưu thất bại:", err);
