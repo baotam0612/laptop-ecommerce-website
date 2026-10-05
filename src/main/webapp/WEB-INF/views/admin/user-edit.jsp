@@ -1,154 +1,70 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@include file="/common/taglib.jsp"%>
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>Chỉnh sửa quyền</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
 
-
-</head>
-<style>
-    /* Body */
-    body {
-        background-color: #f4f6f9;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    /* Card container */
-    .card {
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-    }
-
-    /* Card header */
-    .card-header {
-        font-weight: 600;
-        font-size: 18px;
-        border-left: 5px solid #0d6efd;
-        padding-left: 15px;
-    }
-
-    /* Form labels */
-    .form-label {
-        font-weight: 500;
-        color: #2c3e50;
-    }
-
-    /* Bold text inside form */
-    .fw-bold {
-        font-weight: 600;
-        color: #34495e;
-    }
-
-    /* Checkbox styling */
-    .form-check-input {
-        transform: scale(1.2);
-        margin-right: 8px;
-        accent-color: #0d6efd;
-    }
-
-    .form-check-label {
-        font-weight: 500;
-        color: #2c3e50;
-        cursor: pointer;
-    }
-
-    /* Buttons */
-    .btn-success, .btn-danger {
-        border-radius: 6px;
-        font-weight: 500;
-        padding: 10px 20px;
-        transition: all 0.2s ease;
-    }
-
-    .btn-success:hover {
-        background-color: #1f8b4d;
-        transform: scale(1.05);
-    }
-
-    .btn-danger:hover {
-        background-color: #c0392b;
-        transform: scale(1.05);
-    }
-
-    /* Link back */
-    .text-primary {
-        font-weight: 500;
-    }
-
-    .text-primary:hover {
-        text-decoration: underline;
-    }
-
-    /* Spacing for form and links */
-    .mt-3 {
-        margin-top: 15px !important;
-    }
-
-    .mt-4 {
-        margin-top: 20px !important;
-    }
-</style>
-
-<body class="bg-light">
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-
-            <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Chỉnh sửa tài khoản</h4>
-                </div>
-                <div class="card-body">
-
-                    <form:form method="post" action="/admin/users/update" modelAttribute="user">
-                        <form:hidden path="id"/>
-
-                        <div class="mb-3">
-                            <label class="form-label">Tên đăng nhập:</label>
-                            <p class="fw-bold"><form:input path="userName" readonly="true"/></p>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Email:</label>
-                            <p class="fw-bold"><form:input path="email" readonly="true"/></p>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Chọn quyền:</label>
-                            <c:forEach var="role" items="${roles}">
-                                <div class="form-check">
-                                    <form:checkbox path="roles"
-                                                   value="${role.id}"
-                                                   cssClass="form-check-input"
-                                                   id="roleCheckbox__${role.id}" />
-                                    <label class="form-check-label" for="roleCheckbox__${role.id}">
-                                        ${role.code}
-                                    </label>
-                                </div>
-                            </c:forEach>
-                        </div>
-
-                        <div class="d-flex justify-content-start mt-4">
-                            <button type="submit" class="btn btn-success me-2">💾 Lưu thay đổi</button>
-                            <a href="/admin/users" class="btn btn-danger">Hủy</a>
-                        </div>
-
-                    </form:form>
-
-                </div>
-            </div>
-
-            <div class="mt-3">
-                <a href="/admin/users" class="text-decoration-none text-primary">← Quay lại danh sách</a>
-            </div>
-
+<div class="container-fluid p-0" style="max-width: 650px;">
+    <!-- Header -->
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+            <h3 class="fw-bold text-dark mb-1">Chỉnh Sửa Quyền Tài Khoản</h3>
+            <p class="text-muted mb-0">Cập nhật vai trò truy cập hệ thống cho người dùng.</p>
+        </div>
+        <div>
+            <a href="/admin/users" class="btn btn-outline-secondary d-inline-flex align-items-center gap-1" style="border-radius: var(--radius-md);">
+                <i class="fa-solid fa-arrow-left"></i> Quay lại
+            </a>
         </div>
     </div>
-</div>
 
-</body>
-</html>
+    <!-- Edit Role Card -->
+    <div class="admin-card">
+        <form:form method="post" action="/admin/users/update" modelAttribute="user">
+            <form:hidden path="id"/>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold text-secondary">Tên đăng nhập:</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light border"><i class="fa-solid fa-user text-muted"></i></span>
+                    <form:input path="userName" readonly="true" cssClass="form-control bg-light"/>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-semibold text-secondary">Địa chỉ Email:</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light border"><i class="fa-solid fa-envelope text-muted"></i></span>
+                    <form:input path="email" readonly="true" cssClass="form-control bg-light"/>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-semibold text-secondary d-block">Chọn vai trò hệ thống:</label>
+                <div class="p-3 bg-light border rounded-3">
+                    <c:forEach var="role" items="${roles}">
+                        <div class="form-check mb-2">
+                            <form:checkbox path="roles"
+                                           value="${role.id}"
+                                           cssClass="form-check-input"
+                                           id="roleCheckbox__${role.id}" />
+                            <label class="form-check-label fw-semibold text-dark" for="roleCheckbox__${role.id}">
+                                ${role.code}
+                                <small class="text-muted ms-1 font-monospace">
+                                    <c:choose>
+                                        <c:when test='${role.code == "ADMIN"}'>- Quyền quản trị toàn hệ thống</c:when>
+                                        <c:otherwise>- Quyền thành viên mua hàng</c:otherwise>
+                                    </c:choose>
+                                </small>
+                            </label>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+                <a href="/admin/users" class="btn btn-light border px-4" style="border-radius: var(--radius-md);">Hủy</a>
+                <button type="submit" class="btn btn-primary px-4" style="border-radius: var(--radius-md); background: var(--primary-gradient); border: none;">
+                    <i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi
+                </button>
+            </div>
+        </form:form>
+    </div>
+</div>

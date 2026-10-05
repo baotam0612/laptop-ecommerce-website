@@ -74,7 +74,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     // khi login thanh cong => chuyen huong
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
-
         return new CustomSuccessHandler();
     }
 

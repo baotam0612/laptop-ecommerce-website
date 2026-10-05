@@ -1,38 +1,38 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="vi">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
-</head>
-
-<body>
+<!-- Sidebar Navigation -->
+<nav id="admin-navigation" class="sidebar" aria-label="Điều hướng quản trị">
+    <div class="sidebar-heading">Menu Chính</div>
     
-        <!-- Sidebar Menu -->
-        <div class="sidebar d-flex flex-column p-3">
-            <h4 class="text-center mb-4">Dashboard</h4>
-            <a href="/admin/product-list" class="active">Quản lý sản phẩm</a>
-            <a href="/admin/orders">Quản lý đơn hàng</a>
-            <a href="/admin/users">Quản lý tài khoản</a>
-        </div>
+    <a href="/admin/home" id="nav-home">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>Tổng quan</span>
+    </a>
 
-        <!-- Content -->
-        
- 
+    <a href="/admin/product-list" id="nav-products">
+        <i class="fa-solid fa-boxes-stacked"></i>
+        <span>Quản lý sản phẩm</span>
+    </a>
 
-    <script>
-        // Chuyển active khi click
-        const links = document.querySelectorAll('.sidebar a');
-        links.forEach(link => {
-            link.addEventListener('click', function () {
-                links.forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-    </script>
-</body>
+    <a href="/admin/orders" id="nav-orders">
+        <i class="fa-solid fa-receipt"></i>
+        <span>Quản lý đơn hàng</span>
+    </a>
 
-</html>
+    <a href="/admin/users" id="nav-users">
+        <i class="fa-solid fa-users-gear"></i>
+        <span>Quản lý tài khoản</span>
+    </a>
+
+    <div class="sidebar-heading" style="margin-top: 24px;">Hệ Thống</div>
+
+    <a href="/trang-chu" target="_blank">
+        <i class="fa-solid fa-globe"></i>
+        <span>Trang bán hàng</span>
+    </a>
+
+    <a href="/logout" style="color: #f87171;">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span>Đăng xuất</span>
+    </a>
+</nav>

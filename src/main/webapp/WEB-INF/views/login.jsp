@@ -1,180 +1,96 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-</head>
-<body>
-<style>
-    :root {
-        --brand-gradient: linear-gradient(135deg, #0ea5e9 0%, #6366f1 60%, #8b5cf6 100%);
-    }
+<div class="container py-4 d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div class="card auth-card w-100" style="max-width: 960px;">
+        <div class="row g-0">
+            <!-- Left Branding Banner (Desktop) -->
+            <div class="col-lg-6 d-none d-lg-flex flex-column justify-content-between p-5" style="background: linear-gradient(135deg, rgba(2, 132, 199, 0.25) 0%, rgba(37, 99, 235, 0.15) 100%); border-right: 1px solid rgba(255,255,255,0.08);">
+                <div>
+                    <a href="/trang-chu" class="d-inline-flex align-items-center gap-2 text-white fw-bold fs-4 text-decoration-none">
+                        <i class="fa-solid fa-desktop text-primary"></i>
+                        <span>Computer<span class="text-primary">Shop</span></span>
+                    </a>
+                </div>
 
-    body {
-        min-height: 100vh;
-        background: radial-gradient(1200px 600px at 10% 10%, rgba(99, 102, 241, .18), transparent),
-        radial-gradient(800px 400px at 90% 90%, rgba(14, 165, 233, .18), transparent),
-        #0b1220;
-        color: #e5e7eb;
-    }
-
-    .logo-dot {
-        width: 44px;
-        height: 44px;
-        border-radius: 14px;
-        background: var(--brand-gradient);
-        box-shadow: 0 10px 30px rgba(99, 102, 241, .35);
-    }
-
-    .login-card {
-        background: rgba(17, 24, 39, .6);
-        border: 1px solid rgba(255, 255, 255, .08);
-        box-shadow: 0 20px 80px rgba(0, 0, 0, .35);
-        backdrop-filter: blur(10px);
-    }
-
-    .btn-brand {
-        background: var(--brand-gradient);
-        border: none;
-        color: #fff;
-    }
-
-    .btn-brand:hover {
-        filter: brightness(1.05);
-    }
-
-    .form-floating>label {
-        color: #94a3b8;
-    }
-
-    .form-control,
-    .form-check-input {
-        background-color: rgba(15, 23, 42, .6);
-        color: #e5e7eb;
-        border-color: rgba(255, 255, 255, .15);
-    }
-
-    .form-control:focus {
-        background-color: rgba(15, 23, 42, .85);
-        color: #fff;
-        border-color: #6366f1;
-        box-shadow: 0 0 0 .2rem rgba(99, 102, 241, .25);
-    }
-
-    .link-muted {
-        color: #a3aed0;
-    }
-
-    .link-muted:hover {
-        color: #d0d6f0;
-    }
-
-    /* subtle grid */
-    .grid-overlay {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        opacity: .22;
-        mask-image: radial-gradient(ellipse at center, black, transparent 70%);
-    }
-
-    .grid-overlay svg {
-        width: 100%;
-        height: 100%;
-    }
-
-    @media (max-width: 576px) {
-        .card-body {
-            padding: 1.25rem !important;
-        }
-    }
-</style>
- <div class="grid-overlay">
-        <svg xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
-                    <path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="0.5"></path>
-                </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)"></rect>
-        </svg>
-    </div>
-
-    <div class="container py-5 py-md-0 d-flex align-items-center" style="min-height:100vh;">
-        <div class="row g-4 justify-content-center w-100">
-            <div class="col-12 col-md-10 col-lg-8 col-xl-6">
-                <div class="card login-card rounded-4">
-                    <div class="row g-0">
-
-                        <div class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center p-4">
-                            <div class="text-center px-3">
-                                <div class="logo-dot mb-3 mx-auto"></div>
-                                <h2 class="h4 fw-semibold text-white mb-2">Chào mừng</h2>
-                                <p class="mb-0 text-secondary">Đăng nhập để tiếp tục làm việc</p>
-                            </div>
+                <div class="my-auto py-4">
+                    <h2 class="display-6 fw-bold text-white mb-3">Chào Mừng Quay Trở Lại!</h2>
+                    <p class="text-secondary mb-4" style="color: #94a3b8 !important;">Đăng nhập để quản lý đơn hàng, theo dõi các sản phẩm yêu thích và nhận ngập tràn ưu đãi công nghệ hấp dẫn.</p>
+                    
+                    <div class="d-flex flex-column gap-3">
+                        <div class="d-flex align-items-center gap-3 text-white-50">
+                            <i class="fa-solid fa-circle-check text-primary fs-5"></i>
+                            <span>Bảo mật tài khoản tuyệt đối với chuẩn mã hóa</span>
                         </div>
-
-                        <!-- Right form -->
-                        <div class="col-lg-6">
-                            <div class="card-body p-4 p-md-5">
-                                <div class="d-flex align-items-center gap-3 mb-4">
-                                    <div class="logo-dot"></div>
-                                    <div>
-                                        <div class="small text-secondary">Tài khoản</div>
-                                        <h1 class="h5 text-white mb-0">Đăng nhập</h1>
-                                    </div>
-                                </div>
-
-                               <form action="j_spring_security_check" id="formLogin" method="post">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="userName" name="j_username"
-                                            placeholder="name@example.com" required>
-                                        <label for="email">Tên đăng nhập</label>
-                                        <div class="invalid-feedback">Vui lòng nhập tên đăng nhập hợp lệ.</div>
-                                    </div>
-
-                                    <div class="form-floating mb-3">
-                                        <input type="password" class="form-control" id="password" name="j_password"  placeholder="••••••"
-                                            minlength="4" required>
-                                        <label for="password">Mật khẩu</label>
-                                        <div class="invalid-feedback">Mật khẩu tối thiểu 4 ký tự.</div>
-                                    </div>
-
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="remember" checked>
-                                            <label class="form-check-label" for="remember">Ghi nhớ đăng nhập</label>
-                                        </div>
-                                        <a class="link-offset-2 link-underline link-underline-opacity-0 link-muted"
-                                            href="/forgot-password">Quên mật khẩu?</a>
-                                    </div>
-
-                                    <button class="btn btn-brand w-100 py-2 rounded-3" type="submit">Đăng nhập</button>
-                                    </form>
-
-
-                                    <p class="text-center text-secondary small mt-3 mb-0">Chưa có tài khoản? <a
-                                            class="link-muted" href="/sign-in">Đăng ký ngay</a></p>
-                                </form>
-
-                            </div>
+                        <div class="d-flex align-items-center gap-3 text-white-50">
+                            <i class="fa-solid fa-circle-check text-primary fs-5"></i>
+                            <span>Theo dõi trạng thái giao hàng tức thì</span>
                         </div>
-
                     </div>
                 </div>
+
+                <div class="text-muted small">
+                    &copy; 2026 ComputerShop. All rights reserved.
+                </div>
+            </div>
+
+            <!-- Right Login Form -->
+            <div class="col-lg-6 p-4 p-md-5 auth-form">
+                <div class="auth-header text-start mb-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <span class="badge bg-primary px-3 py-2 rounded-pill font-monospace">HỆ THỐNG</span>
+                        <a href="/trang-chu" class="auth-link small"><i class="fa-solid fa-arrow-left me-1"></i> Về trang chủ</a>
+                    </div>
+                    <h2>Đăng Nhập</h2>
+                    <p>Nhập thông tin tài khoản của bạn để tiếp tục</p>
+                </div>
+
+                <% if (request.getParameter("error") != null) { %>
+                    <div class="alert alert-danger py-2 text-center small mb-4" role="alert" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.3); color: #fca5a5;">
+                        <i class="fa-solid fa-triangle-exclamation me-1"></i> Tên đăng nhập hoặc mật khẩu không chính xác!
+                    </div>
+                <% } %>
+
+                <% if (request.getParameter("logout") != null) { %>
+                    <div class="alert alert-success py-2 text-center small mb-4" role="alert" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.3); color: #86efac;">
+                        <i class="fa-solid fa-circle-check me-1"></i> Đã đăng xuất thành công!
+                    </div>
+                <% } %>
+
+                <form action="j_spring_security_check" id="formLogin" method="post">
+                    <div class="mb-3">
+                        <label for="userName" class="form-label">Tên đăng nhập</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="userName" name="j_username" placeholder="Nhập tên đăng nhập..." required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label for="password" class="form-label mb-0">Mật khẩu</label>
+                            <a class="auth-link small" href="/forgot-password">Quên mật khẩu?</a>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" name="j_password" placeholder="••••••••" minlength="4" required>
+                        </div>
+                    </div>
+
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" id="remember" checked style="accent-color: var(--primary);">
+                        <label class="form-check-label text-secondary small" for="remember" style="color: #cbd5e1 !important;">
+                            Ghi nhớ phiên đăng nhập
+                        </label>
+                    </div>
+
+                    <button class="btn btn-auth w-100 py-3 mb-3" type="submit">
+                        <i class="fa-solid fa-right-to-bracket me-2"></i> Đăng Nhập
+                    </button>
+
+                    <p class="text-center text-muted small mb-0">
+                        Chưa có tài khoản? <a class="auth-link fw-semibold" href="/sign-in">Đăng ký ngay</a>
+                    </p>
+                </form>
             </div>
         </div>
     </div>
-
-
-
-    <!-- Bootstrap JS (optional, used here for form validation helper) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>

@@ -3,3 +3,8 @@ target
 *.project
 .settings
 *.iml
+/.idea
+/.smarttomcat
+/docs
+/Dockerfile
+/spring-boot.iml

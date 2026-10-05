@@ -1,89 +1,127 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@include file="/common/taglib.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<style>
-    .deleteProduct button{
-    margin-top: 20px;
-    padding: 10px 26px;
-    background-color: var(--color-one);
-    border-radius: 8px;
-    }
-</style>
-<div class="flex-fill p-3">
-            <div class="main-container">
-            <form:form modelAttribute="modelEdit" id="editForm"  method="GET">
-                <div class="form-group">
-                    <label>Tên sản phẩm</label>
-                    <form:input class="form-control" path="name"/>
-                </div>
-                <div class="form-group">
-                    <label>Loại</label>
-                    <form:input class="form-control" path="category"/>
-                </div>
-                <div class="form-group">
-                    <label>Hãng</label>
-                    <form:input class="form-control" path="brand"/>
-                </div>
-                <div class="form-group">
-                    <label>cpu</label>
-                    <form:input class="form-control" path="cpu"/>
-                </div>
-                <div class="form-group">
-                    <label>gpu</label>
-                    <form:input class="form-control" path="gpu"/>
-                </div>
-                <div class="form-group">
-                    <label>bộ nhớ trong(rom)</label>
-                    <form:input class="form-control" path="rom"/>
-                </div>
-                <div class="form-group">
-                    <label>bộ nhớ tạm(ram)</label>
-                    <form:input class="form-control" path="ram"/>
-                </div>
-                <div class="form-group">
-                <label>Ảnh sản phẩm</label>
-                <input type="file" id="imageFile" name="imageFile" accept="image/*" />
-                <img id="previewImage" src="#" alt="Preview" style="max-width: 200px; display:none; margin-top:10px;" />
-                </div>
-                <c:if test="${not empty modelEdit.id}">
-                 <div class="form-button">
-                    <div class="addProduct" id="btnAddOrUpdateProduct">
-                        <button>Sửa sản phẩm</button>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
+
+<div class="container-fluid p-0" style="max-width: 900px;">
+    <!-- Header -->
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+            <h3 class="fw-bold text-dark mb-1">
+                <c:choose>
+                    <c:when test="${not empty modelEdit.id}">Chỉnh Sửa Sản Phẩm #${modelEdit.id}</c:when>
+                    <c:otherwise>Thêm Sản Phẩm Mới</c:otherwise>
+                </c:choose>
+            </h3>
+            <p class="text-muted mb-0">Nhập đầy đủ thông tin cấu hình và tải lên hình ảnh sản phẩm.</p>
+        </div>
+        <div>
+            <a href="/admin/product-list" class="btn btn-outline-secondary d-inline-flex align-items-center gap-1" style="border-radius: var(--radius-md);">
+                <i class="fa-solid fa-arrow-left"></i> Quay lại
+            </a>
+        </div>
+    </div>
+
+    <!-- Form Card -->
+    <div class="admin-card">
+        <form:form modelAttribute="modelEdit" id="editForm" method="GET">
+            <form:hidden path="id"/>
+
+            <div class="row g-3">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Tên sản phẩm <span class="text-danger">*</span></label>
+                        <form:input class="form-control" path="name" placeholder="VD: Laptop Asus ROG Strix G16..." required="true"/>
                     </div>
-
-
                 </div>
-</c:if>
-                 <c:if test="${ empty modelEdit.id}">
-                 <div class="form-button">
-                    <div class="addProduct" id="btnAddOrUpdateProduct">
-                        <button>Thêm sản phẩm</button>
-                    </div>
 
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Loại sản phẩm</label>
+                        <form:input class="form-control" path="category" placeholder="Laptop, PC, Linh kiện..."/>
                     </div>
-
                 </div>
-</c:if>
-                 <form:hidden path="id"/>
 
-                </form:form>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Hãng sản xuất</label>
+                        <form:input class="form-control" path="brand" placeholder="Asus, Dell, HP, Apple, Lenovo..."/>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>CPU (Bộ vi xử lý)</label>
+                        <form:input class="form-control" path="cpu" placeholder="VD: Intel Core i7 13650HX"/>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>GPU (Card đồ họa)</label>
+                        <form:input class="form-control" path="gpu" placeholder="VD: NVIDIA GeForce RTX 4060 8GB"/>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Bộ nhớ trong (ROM / Ổ cứng)</label>
+                        <form:input class="form-control" path="rom" placeholder="VD: 512GB NVMe PCIe 4.0 SSD"/>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Bộ nhớ tạm (RAM)</label>
+                        <form:input class="form-control" path="ram" placeholder="VD: 16GB DDR5 4800MHz"/>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Giá bán (VND) <span class="text-danger">*</span></label>
+                        <form:input class="form-control" path="price" placeholder="VD: 25000000" type="number"/>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Hình ảnh sản phẩm</label>
+                        <input type="file" id="imageFile" name="imageFile" accept="image/*" class="form-control"/>
+                        <div class="mt-3">
+                            <img id="previewImage" src="${modelEdit.imagespath}" alt="Preview" style="max-height: 180px; border-radius: var(--radius-md); border: 1px solid var(--border-color); ${empty modelEdit.imagespath ? 'display:none;' : ''}" />
+                        </div>
+                    </div>
+                </div>
             </div>
 
+            <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+                <a href="/admin/product-list" class="btn btn-light border px-4" style="border-radius: var(--radius-md);">Hủy bỏ</a>
+                <button type="button" id="btnAddOrUpdateProduct" class="btn btn-primary px-4" style="border-radius: var(--radius-md); background: var(--primary-gradient); border: none;">
+                    <i class="fa-solid fa-floppy-disk me-1"></i>
+                    <c:choose>
+                        <c:when test="${not empty modelEdit.id}">Cập nhật sản phẩm</c:when>
+                        <c:otherwise>Lưu sản phẩm mới</c:otherwise>
+                    </c:choose>
+                </button>
+            </div>
+        </form:form>
+    </div>
+</div>
 
+<script>
+    $('#imageFile').change(function(e) {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#previewImage').attr('src', e.target.result).show();
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
 
-<script >
-    $('#btnAddOrUpdateProduct').click(function () {
+    $('#btnAddOrUpdateProduct').click(function (event) {
         event.preventDefault();
         const file = $('#imageFile')[0].files[0];
         if (file) {
-            // upload len cloud
             const formData = new FormData();
             formData.append("imageFile", file);
 
@@ -100,6 +138,7 @@
                 },
                 error: function (err) {
                     console.log("Upload lỗi", err);
+                    sendProductData(null);
                 }
             });
         } else {
@@ -127,16 +166,12 @@
             data: JSON.stringify(product),
             contentType: "application/json",
             success: function (res) {
-                console.log("Lưu thành công:", res);
-                window.alert("Thanh Cong");
+                alert("🎉 Lưu thông tin sản phẩm thành công!");
+                window.location.href = "/admin/product-list";
             },
             error: function (err) {
-                console.log("Lưu thất bại:", err);
+                alert("❌ Có lỗi xảy ra khi lưu sản phẩm!");
             }
         });
     }
-
-
 </script>
-</body>
-</html>
